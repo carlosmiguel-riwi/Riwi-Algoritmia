@@ -1,0 +1,108 @@
+:root {
+    color-scheme: light;
+    --color-ink: #203246;
+    --color-navy: #18384f;
+    --color-teal: #176b69;
+    --color-teal-dark: #105653;
+    --color-page: #f3f6f8;
+    --color-panel: #e8f0f3;
+    --color-border: #d3e0e6;
+}
+
+body {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+}
+
+header {
+    background: linear-gradient(135deg, #18384f, #285e70);
+    box-shadow: 0 4px 16px rgba(24, 56, 79, 0.18);
+}
+
+header h1 {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+header p {
+    max-width: 760px;
+    line-height: 1.65;
+}
+
+section {
+    background-color: var(--color-panel);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 24px rgba(32, 50, 70, 0.07);
+}
+
+section h2 {
+    color: var(--color-navy);
+    font-weight: 700;
+}
+
+section h3 {
+    color: #315d70;
+}
+
+.card {
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    box-shadow: 0 4px 12px rgba(32, 50, 70, 0.06);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(32, 50, 70, 0.12);
+}
+
+.card-title {
+    color: var(--color-navy);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--color-teal);
+    --bs-btn-border-color: var(--color-teal);
+    --bs-btn-hover-bg: var(--color-teal-dark);
+    --bs-btn-hover-border-color: var(--color-teal-dark);
+    --bs-btn-active-bg: var(--color-teal-dark);
+    --bs-btn-active-border-color: var(--color-teal-dark);
+    --bs-btn-focus-shadow-rgb: 23, 107, 105;
+}
+
+.table {
+    --bs-table-color: var(--color-ink);
+    --bs-table-bg: #ffffff;
+    --bs-table-border-color: var(--color-border);
+}
+
+.table thead th {
+    --bs-table-bg: #d8e6eb;
+    color: var(--color-navy);
+}
+
+pre {
+    color: #273b4d;
+    line-height: 1.55;
+    overflow-x: auto;
+}
+
+img {
+    border-radius: 0.55rem;
+}
+
+footer {
+    background-color: var(--color-navy);
+    color: #ffffff;
+    margin-top: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+}

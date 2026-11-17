@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmos con ciclos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="text-white py-3 px-4 d-flex flex-column align-items-center text-center">
+        <h1>Actividad algoritmos con ciclos.</h1>
+        <p class="mb-0"><strong>Introducción a la algoritmia y pensamiento computacional:</strong><br><br>
+            Algoritmos iterativos en PSeInt con tablas de traza y evidencia de ejecución; incluye una factura
+            descompuesta en SubProcesos y su árbol de componentes.</p>
+    </header>
+
+    <main class="container">
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Caja registradora con ciclo.</h2>
+            <p>El algoritmo acumula precios positivos en un subtotal. El ciclo termina cuando se ingresa 0 o un
+                valor negativo; ese valor de cierre no se agrega a la compra.</p>
+
+            <h3 class="mb-3">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo CarritoComprasCiclo
+    Definir precio, subtotal Como Real
+    subtotal &lt;- 0
+    precio &lt;- 1
+
+    Escribir "---- CAJA REGISTRADORA ----"
+    Escribir "Ingrese 0 o un valor negativo para terminar."
+
+    Mientras precio &gt; 0 Hacer
+        Escribir "Ingrese el precio del producto:"
+        Leer precio
+        Si precio &gt; 0 Entonces
+            subtotal &lt;- subtotal + precio
+            Escribir "-> Acumulado parcial: $", subtotal
+        FinSi
+    FinMientras
+
+    Escribir "Subtotal final de la compra: $", subtotal
+FinAlgoritmo</pre></div>
+
+            <h3 class="mb-3 mt-4">Diagrama de flujo:</h3>
+            <div class="row justify-content-center mb-3">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <img src="./img/diagrama.png" alt="Diagrama de flujo del algoritmo CarritoComprasCiclo"
+                        class="img-fluid d-block mx-auto bg-white p-2 rounded-3">
+                </div>
+            </div>
+
+            <h3 class="mb-3 mt-4">Tabla de traza:</h3>
+            <p>Se traza cada lectura y la actualización del subtotal. El subtotal inicial es 0.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Caso / paso</th>
+                            <th scope="col">Precio leído</th>
+                            <th scope="col">¿Precio &gt; 0?</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col">Acción / salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 / inicio</td>
+                            <td>—</td>
+                            <td>Sí (inicializado en 1)</td>
+                            <td>0</td>
+                            <td>Inicia el ciclo</td>
+                        </tr>
+                        <tr>
+                            <td>1 / lectura 1</td>
+                            <td>20</td>
+                            <td>Sí</td>
+                            <td>20</td>
+                            <td>Acumulado parcial: $20</td>
+                        </tr>
+                        <tr>
+                            <td>1 / lectura 2</td>
+                            <td>-40</td>
+                            <td>No</td>
+                            <td>20</td>
+                            <td>Termina; no suma el valor de cierre</td>
+                        </tr>
+                        <tr>
+                            <td>1 / fin</td>
+                            <td>—</td>
+                            <td>No</td>
+                            <td>20</td>
+                            <td>Subtotal final: $20</td>
+                        </tr>
+                        <tr>
+                            <td>2 / lectura 1</td>
+                            <td>-500</td>
+                            <td>No</td>
+                            <td>0</td>
+                            <td>Termina sin productos; subtotal final: $0</td>
+                        </tr>
+                        <tr>
+                            <td>3 / lectura 1 (borde)</td>
+                            <td>0</td>
+                            <td>No</td>
+                            <td>0</td>
+                            <td>Termina sin sumar; subtotal final: $0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="mb-3 mt-4">Evidencia de ejecución:</h3>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-6">
+                    <div class="card p-3 h-100">
+                        <img src="./img/prueba1.png" alt="Ejecución con precio 20 y luego valor de cierre -40"
+                            class="img-fluid">
+                        <p class="text-center mb-0 mt-2">Prueba #1: suma 20; el valor -40 finaliza el ciclo sin alterar el subtotal.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3 h-100">
+                        <img src="./img/prueba2.png" alt="Ejecución con valor de cierre -500 y subtotal cero"
+                            class="img-fluid">
+                        <p class="text-center mb-0 mt-2">Prueba #2: un valor negativo como primera entrada deja el subtotal en 0.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Factura descompuesta en SubProcesos.</h2>
+            <p>La factura delega el registro de los precios y la presentación del resumen en SubProcesos.
+                El ejemplo calcula el subtotal de los productos; no aplica impuestos ni descuentos.</p>
+
+            <h3 class="mb-3">Árbol de componentes:</h3>
+            <div class="bg-white rounded-3 p-3">
+                <ul class="mb-0">
+                    <li><strong>FacturaCompra</strong> (algoritmo principal)
+                        <ul>
+                            <li><strong>RegistrarProductos</strong> (SubProceso): repite la lectura, acumula los precios positivos y devuelve el subtotal.</li>
+                            <li><strong>ImprimirFactura</strong> (SubProceso): muestra el subtotal y el total a pagar.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="mb-3 mt-4">Algoritmo modular en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo FacturaCompra
+    Definir subtotal Como Real
+    subtotal &lt;- 0
+    RegistrarProductos(subtotal)
+    ImprimirFactura(subtotal)
+FinAlgoritmo
+
+SubProceso RegistrarProductos(subtotal Por Referencia)
+    Definir precio Como Real
+    precio &lt;- 1
+    Escribir "Ingrese 0 o un valor negativo para terminar."
+
+    Mientras precio &gt; 0 Hacer
+        Escribir "Ingrese el precio del producto:"
+        Leer precio
+        Si precio &gt; 0 Entonces
+            subtotal &lt;- subtotal + precio
+            Escribir "Producto agregado: $", precio
+        FinSi
+    FinMientras
+FinSubProceso
+
+SubProceso ImprimirFactura(subtotal)
+    Escribir "----- FACTURA -----"
+    Escribir "Subtotal: $", subtotal
+    Escribir "Total a pagar: $", subtotal
+FinSubProceso</pre></div>
+        </section>
+    </main>
+
+    <footer class="text-white text-center p-2">
+        <p class="mb-0">Algoritmia | Actividad algoritmos con ciclos</p>
+    </footer>
+</body>
+</html>

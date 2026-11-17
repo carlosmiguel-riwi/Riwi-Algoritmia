@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repetir y descomponer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="text-white py-3 px-4 d-flex flex-column align-items-center text-center">
+        <h1>Actividad repetir y descomponer.</h1>
+        <p class="mb-0"><strong>Introducción a la algoritmia y pensamiento computacional:</strong><br><br>
+            Programas de la sesión 3 en PSeInt: ciclos con patrones (centinela, contador, acumulador, bandera, máximo y mínimo), ciclos anidados y descomposición en SubProcesos, con tablas de traza.</p>
+    </header>
+
+    <main class="container">
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Cajero del PIN.</h2>
+            <p>Tres intentos para escribir el PIN; si se fallan los tres, la tarjeta se bloquea. El ciclo debe parar si se acierta <strong>O</strong> si se acabaron los intentos (con Y nunca terminaría). Usa tres patrones: contador, bandera y límite de intentos. El PIN 1234 es un ejemplo.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo CajeroPIN
+    Definir pinCorrecto, pin, intentos Como Entero
+    Definir acceso Como Logico
+    pinCorrecto &lt;- 1234
+    intentos &lt;- 0
+    acceso &lt;- Falso
+    Repetir
+        Escribir &quot;Ingrese su PIN:&quot;
+        Leer pin
+        intentos &lt;- intentos + 1
+        Si pin = pinCorrecto Entonces
+            acceso &lt;- Verdadero
+        FinSi
+    Hasta Que acceso O intentos = 3
+    Si acceso Entonces
+        Escribir &quot;Acceso concedido&quot;
+    SiNo
+        Escribir &quot;Tarjeta bloqueada&quot;
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Tabla de traza (PIN equivocado tres veces):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Vuelta</th><th scope="col">pin</th><th scope="col">intentos</th><th scope="col">acceso</th><th scope="col">¿Termina?</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>1111</td><td>1</td><td>Falso</td><td>No</td></tr>
+                        <tr><td>2</td><td>2222</td><td>2</td><td>Falso</td><td>No</td></tr>
+                        <tr><td>3</td><td>3333</td><td>3</td><td>Falso</td><td>Sí (intentos = 3)</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Cajero del parqueadero.</h2>
+            <p>No se sabe cuántos carros llegan: se cobra uno por uno y el 0 es el centinela que cierra la caja. Se lee el primer valor antes del ciclo y de nuevo dentro de él (la actualización). Contador y acumulador arrancan en 0 antes del ciclo.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo CajeroParqueadero
+    Definir valor, total Como Real
+    Definir carros Como Entero
+    total &lt;- 0
+    carros &lt;- 0
+    Escribir &quot;Valor cobrado (0 para cerrar la caja):&quot;
+    Leer valor
+    Mientras valor &lt;&gt; 0 Hacer
+        total &lt;- total + valor
+        carros &lt;- carros + 1
+        Escribir &quot;Valor cobrado (0 para cerrar la caja):&quot;
+        Leer valor
+    FinMientras
+    Escribir &quot;Carros atendidos: &quot;, carros
+    Escribir &quot;Total recaudado: $&quot;, total
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Tabla de traza (4000, 8000, 2000, 0):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Vuelta</th><th scope="col">valor</th><th scope="col">total</th><th scope="col">carros</th><th scope="col">Lee</th></tr></thead>
+                    <tbody>
+                        <tr><td>Antes del ciclo</td><td>4000</td><td>0</td><td>0</td><td>—</td></tr>
+                        <tr><td>1</td><td>4000</td><td>4000</td><td>1</td><td>8000</td></tr>
+                        <tr><td>2</td><td>8000</td><td>12000</td><td>2</td><td>2000</td></tr>
+                        <tr><td>3</td><td>2000</td><td>14000</td><td>3</td><td>0</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <p class="mt-3 mb-0">Resultado: 3 carros atendidos y $14.000 recaudados.</p>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Calificaciones.</h2>
+            <p>Con un solo ciclo <code>Para</code> se calcula el promedio, los aprobados (3 o más), la nota más alta, la más baja y si alguien perdió. El mayor arranca en 0 y el menor en 5 para que la primera nota siempre los reemplace.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Calificaciones
+    Definir i, aprobados Como Entero
+    Definir nota, suma, mayor, menor, promedio Como Real
+    Definir alguienPerdio Como Logico
+    suma &lt;- 0
+    aprobados &lt;- 0
+    mayor &lt;- 0
+    menor &lt;- 5
+    alguienPerdio &lt;- Falso
+    Para i &lt;- 1 Hasta 5 Con Paso 1 Hacer
+        Escribir &quot;Nota del estudiante &quot;, i, &quot;:&quot;
+        Leer nota
+        suma &lt;- suma + nota
+        Si nota &gt;= 3 Entonces
+            aprobados &lt;- aprobados + 1
+        SiNo
+            alguienPerdio &lt;- Verdadero
+        FinSi
+        Si nota &gt; mayor Entonces
+            mayor &lt;- nota
+        FinSi
+        Si nota &lt; menor Entonces
+            menor &lt;- nota
+        FinSi
+    FinPara
+    promedio &lt;- suma / 5
+    Escribir &quot;Promedio: &quot;, promedio
+    Escribir &quot;Aprobados: &quot;, aprobados
+    Escribir &quot;Nota más alta: &quot;, mayor
+    Escribir &quot;Nota más baja: &quot;, menor
+    Si alguienPerdio Entonces
+        Escribir &quot;Hay estudiantes en refuerzo&quot;
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Prueba (3.5, 2.8, 4.9, 3.0, 4.2):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Promedio</th><th scope="col">Aprobados</th><th scope="col">Más alta</th><th scope="col">Más baja</th><th scope="col">¿Alguien perdió?</th></tr></thead>
+                    <tbody>
+                        <tr><td>3.68</td><td>4</td><td>4.9</td><td>2.8</td><td>Sí</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Pirámide.</h2>
+            <p>Un ciclo dentro de otro: el externo recorre las filas y el interno dibuja primero los espacios (<code>n - fila</code>) y luego los asteriscos (<code>2 * fila - 1</code>, números impares). En la última fila el ciclo de espacios no da ninguna vuelta.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Piramide
+    Definir n, fila, j Como Entero
+    Escribir &quot;Altura de la pirámide:&quot;
+    Leer n
+    Para fila &lt;- 1 Hasta n Con Paso 1 Hacer
+        Para j &lt;- 1 Hasta n - fila Con Paso 1 Hacer
+            Escribir Sin Saltar &quot; &quot;
+        FinPara
+        Para j &lt;- 1 Hasta 2 * fila - 1 Con Paso 1 Hacer
+            Escribir Sin Saltar &quot;*&quot;
+        FinPara
+        Escribir &quot;&quot;
+    FinPara
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Tabla de traza (n = 4):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Fila</th><th scope="col">Espacios</th><th scope="col">Asteriscos</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>3</td><td>1</td></tr>
+                        <tr><td>2</td><td>2</td><td>3</td></tr>
+                        <tr><td>3</td><td>1</td><td>5</td></tr>
+                        <tr><td>4</td><td>0</td><td>7</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Factura del restaurante con SubProcesos.</h2>
+            <p>El impuesto al consumo (8 %) y la propina (10 %) son el mismo problema, calcular un porcentaje, así que un solo SubProceso se usa dos veces.</p>
+            <h3 class="mb-3 mt-4">Árbol de componentes:</h3>
+            <div class="bg-white rounded-3 p-3"><ul class="mb-0">
+                <li><strong>FacturaRestaurante</strong> (algoritmo principal)<ul><li><strong>LeerPedido</strong>: lee los platos y devuelve el subtotal.</li><li><strong>CalcularPorcentaje</strong>: devuelve base × porcentaje / 100 (se usa para impuesto y propina).</li><li><strong>ImprimirFactura</strong>: muestra subtotal, impuesto, propina y total.</li></ul></li>
+            </ul></div>
+            <h3 class="mb-3 mt-4">Algoritmo modular en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo FacturaRestaurante
+    Definir subtotal, impuesto, propina Como Real
+    subtotal &lt;- LeerPedido()
+    impuesto &lt;- CalcularPorcentaje(subtotal, 8)
+    propina &lt;- CalcularPorcentaje(subtotal, 10)
+    ImprimirFactura(subtotal, impuesto, propina)
+FinAlgoritmo
+
+SubProceso subtotal &lt;- LeerPedido()
+    Definir subtotal, precio Como Real
+    Definir n, i, cantidad Como Entero
+    subtotal &lt;- 0
+    Escribir &quot;¿Cuántos tipos de plato pidió?&quot;
+    Leer n
+    Para i &lt;- 1 Hasta n Con Paso 1 Hacer
+        Escribir &quot;Cantidad y precio del plato &quot;, i, &quot;:&quot;
+        Leer cantidad, precio
+        subtotal &lt;- subtotal + cantidad * precio
+    FinPara
+FinSubProceso
+
+SubProceso resultado &lt;- CalcularPorcentaje(base, porcentaje)
+    Definir resultado Como Real
+    resultado &lt;- base * porcentaje / 100
+FinSubProceso
+
+SubProceso ImprimirFactura(subtotal, impuesto, propina)
+    Escribir &quot;----- FACTURA -----&quot;
+    Escribir &quot;Subtotal: $&quot;, subtotal
+    Escribir &quot;Impuesto (8%): $&quot;, impuesto
+    Escribir &quot;Propina (10%): $&quot;, propina
+    Escribir &quot;Total a pagar: $&quot;, subtotal + impuesto + propina
+FinSubProceso</pre></div>
+            <h3 class="mb-3 mt-4">Prueba (2 bandejas de $25.000 y 1 ajiaco de $12.000):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Subtotal</th><th scope="col">Impuesto 8 %</th><th scope="col">Propina 10 %</th><th scope="col">Total</th></tr></thead>
+                    <tbody>
+                        <tr><td>62.000</td><td>4.960</td><td>6.200</td><td>73.160</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Árbol de componentes de una página web.</h2>
+            <p>Descomposición de la página de un restaurante. La tarjeta de plato se repite para cada plato, como un ciclo, y cada caja se reutiliza como un SubProceso.</p>
+            <div class="bg-white rounded-3 p-3"><ul class="mb-0">
+                <li><strong>Página</strong><ul><li><strong>Encabezado</strong>: Logo, Menú, Banner</li><li><strong>Contenido</strong><ul><li>Lista de platos<ul><li>Tarjeta de plato × 3 (se repite): Imagen, Nombre y precio, Botón Agregar</li></ul></li></ul></li><li><strong>Pie de página</strong></li></ul></li>
+            </ul></div>
+        </section>
+    </main>
+
+    <footer class="text-white text-center p-2">
+        <p class="mb-0">Algoritmia | Actividad repetir y descomponer</p>
+    </footer>
+</body>
+</html>

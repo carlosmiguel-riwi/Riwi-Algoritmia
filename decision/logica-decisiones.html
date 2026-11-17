@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica y decisiones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="text-white py-3 px-4 d-flex flex-column align-items-center text-center">
+        <h1>Actividad lógica y decisiones.</h1>
+        <p class="mb-0"><strong>Introducción a la algoritmia y pensamiento computacional:</strong><br><br>
+            Programas de la sesión 2 en PSeInt: validación de registro, negación con De Morgan, parqueadero, semáforo de inventario y año bisiesto, con tablas de verdad y de decisión y pruebas de escritorio.</p>
+    </header>
+
+    <main class="container">
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Validar registro.</h2>
+            <p>Regla: se puede registrar quien tiene 14 años o más <strong>Y</strong> acepta los términos. La respuesta se pasa a mayúsculas antes de comparar para que «s» y «S» valgan igual.</p>
+            <h3 class="mb-3 mt-4">Tabla de verdad:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">edad &gt;= 14</th><th scope="col">Acepta</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>Verdadero</td><td>Verdadero</td><td>Registro exitoso</td></tr>
+                        <tr><td>Verdadero</td><td>Falso</td><td>No puedes registrarte</td></tr>
+                        <tr><td>Falso</td><td>Verdadero</td><td>No puedes registrarte</td></tr>
+                        <tr><td>Falso</td><td>Falso</td><td>No puedes registrarte</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo ValidarRegistro
+    Definir edad Como Entero
+    Definir respuesta Como Caracter
+    Escribir &quot;Ingrese su edad:&quot;
+    Leer edad
+    Escribir &quot;¿Aceptas los términos? (S/N):&quot;
+    Leer respuesta
+    respuesta &lt;- Mayusculas(respuesta)
+    Si edad &gt;= 14 Y respuesta = &quot;S&quot; Entonces
+        Escribir &quot;Registro exitoso&quot;
+    SiNo
+        Escribir &quot;No puedes registrarte&quot;
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Pruebas de escritorio:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Edad</th><th scope="col">Respuesta</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>14</td><td>S</td><td>Registro exitoso (borde)</td></tr>
+                        <tr><td>13</td><td>S</td><td>No puedes registrarte (borde)</td></tr>
+                        <tr><td>20</td><td>s</td><td>Registro exitoso (minúscula)</td></tr>
+                        <tr><td>20</td><td>N</td><td>No puedes registrarte</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Edad válida y propinas corregida.</h2>
+            <p>Negar con De Morgan: la edad es válida si <code>edad &gt;= 0 Y edad &lt;= 120</code>; es inválida si <code>edad &lt; 0 O edad &gt; 120</code> (al negar, la Y cambia a O). Además, la calculadora de propinas ahora evita la división por cero.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Edad</th><th scope="col">¿edad &lt; 0 O edad &gt; 120?</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>-1</td><td>Sí</td><td>Inválida</td></tr>
+                        <tr><td>0</td><td>No</td><td>Válida (borde)</td></tr>
+                        <tr><td>120</td><td>No</td><td>Válida (borde)</td></tr>
+                        <tr><td>121</td><td>Sí</td><td>Inválida</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <h3 class="mb-3 mt-4">Decisión agregada a la calculadora de propinas:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Si personas &lt;= 0 Entonces
+    Escribir &quot;El número de personas debe ser mayor que cero&quot;
+SiNo
+    propina &lt;- cuenta * porcentaje / 100
+    total &lt;- cuenta + propina
+    Escribir &quot;Cada persona paga: &quot;, total / personas
+FinSi</pre></div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Parqueadero.</h2>
+            <p>Carro: $4.000 por hora o fracción; moto: $2.000. Los primeros 15 minutos son gratis, el máximo diario es $30.000 y con factura del centro comercial se paga la mitad (después del tope). Tipo inválido o minutos negativos es error.</p>
+            <h3 class="mb-3 mt-4">Tabla de decisión:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Regla</th><th scope="col">Tipo</th><th scope="col">Minutos</th><th scope="col">Factura</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>R1</td><td>Cualquiera</td><td>Menos de 0</td><td>Cualquiera</td><td>Error: minutos negativos</td></tr>
+                        <tr><td>R2</td><td>Ni 1 ni 2</td><td>0 o más</td><td>Cualquiera</td><td>Error: tipo no válido</td></tr>
+                        <tr><td>R3</td><td>Carro o moto</td><td>De 0 a 15</td><td>Cualquiera</td><td>Gratis</td></tr>
+                        <tr><td>R4</td><td>Carro o moto</td><td>Más de 15</td><td>No</td><td>Horas × tarifa, máximo $30.000</td></tr>
+                        <tr><td>R5</td><td>Carro o moto</td><td>Más de 15</td><td>Sí</td><td>Lo de R4 dividido entre 2</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Parqueadero
+    Definir tipo, minutos, horas Como Entero
+    Definir tarifa, valor Como Real
+    Definir factura Como Caracter
+    Escribir &quot;Tipo de vehículo (1 = Carro, 2 = Moto):&quot;
+    Leer tipo
+    Escribir &quot;Minutos de estadía:&quot;
+    Leer minutos
+    Si minutos &lt; 0 Entonces
+        Escribir &quot;Error: minutos negativos&quot;
+    SiNo
+        Segun tipo Hacer
+            1: tarifa &lt;- 4000
+            2: tarifa &lt;- 2000
+            De Otro Modo: tarifa &lt;- 0
+        FinSegun
+        Si tarifa = 0 Entonces
+            Escribir &quot;Error: tipo no válido&quot;
+        SiNo
+            Si minutos &lt;= 15 Entonces
+                valor &lt;- 0
+            SiNo
+                horas &lt;- trunc((minutos + 59) / 60)
+                valor &lt;- horas * tarifa
+                Si valor &gt; 30000 Entonces
+                    valor &lt;- 30000
+                FinSi
+                Escribir &quot;¿Tiene factura del centro comercial? (S/N):&quot;
+                Leer factura
+                Si Mayusculas(factura) = &quot;S&quot; Entonces
+                    valor &lt;- valor / 2
+                FinSi
+            FinSi
+            Escribir &quot;Valor a pagar: $&quot;, valor
+        FinSi
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Casos borde:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">#</th><th scope="col">Tipo</th><th scope="col">Min</th><th scope="col">Factura</th><th scope="col">Esperado</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Carro</td><td>15</td><td>No</td><td>0</td></tr>
+                        <tr><td>2</td><td>Carro</td><td>16</td><td>No</td><td>4.000</td></tr>
+                        <tr><td>3</td><td>Carro</td><td>60</td><td>No</td><td>4.000</td></tr>
+                        <tr><td>4</td><td>Carro</td><td>61</td><td>No</td><td>8.000</td></tr>
+                        <tr><td>5</td><td>Moto</td><td>61</td><td>Sí</td><td>2.000</td></tr>
+                        <tr><td>6</td><td>Carro</td><td>600</td><td>No</td><td>30.000 (tope)</td></tr>
+                        <tr><td>7</td><td>Carro</td><td>600</td><td>Sí</td><td>15.000</td></tr>
+                        <tr><td>8</td><td>3</td><td>30</td><td>No</td><td>Tipo no válido</td></tr>
+                        <tr><td>9</td><td>Carro</td><td>-5</td><td>No</td><td>Minutos negativos</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <h3 class="mb-3 mt-4">Prueba de escritorio del caso 7:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">tarifa</th><th scope="col">horas</th><th scope="col">valor sin tope</th><th scope="col">valor con tope</th><th scope="col">con factura</th></tr></thead>
+                    <tbody>
+                        <tr><td>4000</td><td>10</td><td>40000</td><td>30000</td><td>15000</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <p class="mt-3 mb-0">El tope se aplica antes del descuento por factura; si se invierte el orden, el caso 7 da otro resultado.</p>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Semáforo de inventario.</h2>
+            <p>Menos de 0 unidades: error; 0: rojo, agotado; de 1 a 10: amarillo, hay que pedir; más de 10: verde, todo bien.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Semaforo
+    Definir unidades Como Entero
+    Escribir &quot;Unidades en inventario:&quot;
+    Leer unidades
+    Si unidades &lt; 0 Entonces
+        Escribir &quot;Error: unidades negativas&quot;
+    SiNo
+        Si unidades = 0 Entonces
+            Escribir &quot;ROJO: agotado&quot;
+        SiNo
+            Si unidades &lt;= 10 Entonces
+                Escribir &quot;AMARILLO: hay que pedir&quot;
+            SiNo
+                Escribir &quot;VERDE: todo bien&quot;
+            FinSi
+        FinSi
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Casos borde:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Unidades</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>-1</td><td>Error</td></tr>
+                        <tr><td>0</td><td>Rojo, agotado</td></tr>
+                        <tr><td>1</td><td>Amarillo (borde)</td></tr>
+                        <tr><td>10</td><td>Amarillo (borde)</td></tr>
+                        <tr><td>11</td><td>Verde</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Año bisiesto.</h2>
+            <p>Un año es bisiesto si es divisible entre 4 y no entre 100, <strong>o</strong> si es divisible entre 400. Los paréntesis son necesarios porque la Y se evalúa antes que la O.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Bisiesto
+    Definir anio Como Entero
+    Escribir &quot;Ingrese un año:&quot;
+    Leer anio
+    Si (anio MOD 4 = 0 Y anio MOD 100 &lt;&gt; 0) O anio MOD 400 = 0 Entonces
+        Escribir &quot;El año &quot;, anio, &quot; es bisiesto&quot;
+    SiNo
+        Escribir &quot;El año &quot;, anio, &quot; no es bisiesto&quot;
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Pruebas:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Año</th><th scope="col">Resultado</th></tr></thead>
+                    <tbody>
+                        <tr><td>2026</td><td>No bisiesto</td></tr>
+                        <tr><td>2024</td><td>Bisiesto</td></tr>
+                        <tr><td>1900</td><td>No bisiesto (divisible entre 100, no entre 400)</td></tr>
+                        <tr><td>2000</td><td>Bisiesto (divisible entre 400)</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-white text-center p-2">
+        <p class="mb-0">Algoritmia | Actividad lógica y decisiones</p>
+    </footer>
+</body>
+</html>

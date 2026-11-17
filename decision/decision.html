@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmos de decisión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="text-white py-3 px-4 d-flex flex-column align-items-center text-center">
+        <h1>Actividad algoritmos de decisión.</h1>
+        <p class="mb-0"><strong>Introducción a la algoritmia y pensamiento computacional:</strong><br><br>
+            Algoritmo de decisión en PSeInt para calcular el descuento y el costo de envío de una compra,
+            con tabla de decisión y pruebas de escritorio que incluyen los casos borde.</p>
+    </header>
+
+    <main class="container">
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Descuentos y envío de una compra.</h2>
+            <p>El algoritmo valida que el monto no sea negativo y, según el estado VIP del cliente y si la compra
+                alcanza los 100, determina el descuento y el costo de envío. Las compras de 100 o más no pagan envío.
+                Para ejecutar el algoritmo, el monto debe ingresarse como número y la condición VIP como
+                <code>Verdadero</code> o <code>Falso</code>.</p>
+
+            <h3 class="mb-3">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo SistemaTienda
+    Definir monto, descuento, costoEnvio, total Como Real
+    Definir esVIP Como Logico
+
+    Escribir "Ingrese el monto de la compra:"
+    Leer monto
+
+    Si monto &lt; 0 Entonces
+        Escribir "Error: el monto de la compra no puede ser negativo."
+    SiNo
+        Escribir "¿El cliente es VIP? (Verdadero/Falso):"
+        Leer esVIP
+
+        descuento &lt;- 0
+        costoEnvio &lt;- 10
+
+        Si esVIP Entonces
+            Si monto &gt;= 100 Entonces
+                descuento &lt;- monto * 0.20
+                costoEnvio &lt;- 0
+            SiNo
+                descuento &lt;- monto * 0.10
+            FinSi
+        SiNo
+            Si monto &gt;= 100 Entonces
+                descuento &lt;- monto * 0.05
+                costoEnvio &lt;- 0
+            FinSi
+        FinSi
+
+        total &lt;- monto - descuento + costoEnvio
+        Escribir "Monto ingresado: ", monto
+        Escribir "Descuento aplicado: ", descuento
+        Escribir "Costo de envio: ", costoEnvio
+        Escribir "Total a pagar: ", total
+    FinSi
+FinAlgoritmo</pre></div>
+
+            <h3 class="mb-3 mt-4">Diagrama de flujo:</h3>
+            <div class="row justify-content-center mb-3">
+                <div class="col-12 col-md-10">
+                    <img src="./img/diagrama.png" alt="Diagrama de flujo del algoritmo SistemaTienda"
+                        class="img-fluid d-block mx-auto bg-white p-2 rounded-3">
+                </div>
+            </div>
+
+            <h3 class="mb-3 mt-4">Tabla de decisión:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cliente VIP</th>
+                            <th scope="col">Monto de compra</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Costo de envío</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No</td>
+                            <td>Menor que 100</td>
+                            <td>0 %</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>No</td>
+                            <td>100 o más</td>
+                            <td>5 %</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Sí</td>
+                            <td>Menor que 100</td>
+                            <td>10 %</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Sí</td>
+                            <td>100 o más</td>
+                            <td>20 %</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Si el monto es menor que cero, el algoritmo informa el error y no calcula el descuento ni el total.</p>
+
+            <h3 class="mb-3 mt-4">Prueba de escritorio (incluye casos borde):</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Monto</th>
+                            <th scope="col">VIP</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Envío</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>-1</td>
+                            <td>No se solicita</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Rechazado: monto negativo</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>No</td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>Límite inferior válido</td>
+                        </tr>
+                        <tr>
+                            <td>99</td>
+                            <td>Sí</td>
+                            <td>9.9</td>
+                            <td>10</td>
+                            <td>99.1</td>
+                            <td>Justo por debajo de 100</td>
+                        </tr>
+                        <tr>
+                            <td>100</td>
+                            <td>No</td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>95</td>
+                            <td>Límite de descuento y envío gratis</td>
+                        </tr>
+                        <tr>
+                            <td>100</td>
+                            <td>Sí</td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>80</td>
+                            <td>Límite de descuento VIP y envío gratis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="mb-3 mt-4">Evidencia de ejecución:</h3>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-6">
+                    <div class="card p-3 h-100">
+                        <img src="./img/prueba1.png" alt="Ejecución con monto de compra 20 y total a pagar 30"
+                            class="img-fluid">
+                        <p class="text-center mb-0 mt-2">Prueba #1: compra de 20; sin descuento y con envío de 10.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3 h-100">
+                        <img src="./img/prueba2.png" alt="Error de PSeInt al ingresar texto en el campo del monto"
+                            class="img-fluid">
+                        <p class="text-center mb-0 mt-2">Prueba #2: entrada no numérica; PSeInt reporta incompatibilidad de tipo.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-3 mb-0">La segunda captura muestra un error de tipo de PSeInt, no una validación controlada
+                por el algoritmo: se debe ingresar un monto numérico.</p>
+        </section>
+    </main>
+
+    <footer class="text-white text-center p-2">
+        <p class="mb-0">Algoritmia | Actividad algoritmos de decisión</p>
+    </footer>
+</body>
+</html>

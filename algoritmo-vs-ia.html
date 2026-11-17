@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmo o IA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header class="text-white py-3 px-4 d-flex flex-column align-items-center text-center">
+        <h1>Algoritmo o IA: ¿qué diferencia hay?</h1>
+        <p class="mb-0"><strong>Introducción a la algoritmia y pensamiento computacional:</strong><br><br>
+            Resumen de la primera clase de inteligencia artificial: algoritmos, reglas escritas a mano, aprendizaje automático y aprendizaje profundo.</p>
+    </header>
+
+    <main class="container">
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">La idea central.</h2>
+            <p>Un <strong>algoritmo</strong> sigue instrucciones que alguien escribió de antemano. Un sistema de <strong>aprendizaje automático</strong> (una forma de IA) ajusta su funcionamiento a partir de ejemplos para encontrar patrones, y su respuesta es probable, no segura.</p>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Conceptos clave.</h2>
+            <p>De lo más amplio a lo más específico: inteligencia artificial → aprendizaje automático → aprendizaje profundo.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Concepto</th><th scope="col">Qué es</th><th scope="col">Ejemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td>Algoritmo</td><td>Serie ordenada de pasos que transforma datos de entrada en un resultado</td><td>Receta, calculadora, ordenar productos por precio</td></tr>
+                        <tr><td>Inteligencia artificial</td><td>Sistemas que realizan tareas que asociamos con capacidades inteligentes; no significa que piensen o comprendan</td><td>Reconocer voz, traducir, recomendar</td></tr>
+                        <tr><td>Reglas si... entonces</td><td>Una persona define de antemano una condición y una acción</td><td>Puerta automática, recordatorio de pago</td></tr>
+                        <tr><td>Aprendizaje automático</td><td>El sistema analiza ejemplos y ajusta un modelo; calcula qué resultado es más probable</td><td>Reconocer gatos en fotos</td></tr>
+                        <tr><td>Aprendizaje profundo</td><td>Aprendizaje automático con redes neuronales de varias capas</td><td>Voz, imágenes, lenguaje</td></tr>
+                        <tr><td>IA generativa</td><td>Herramientas que producen contenido nuevo a partir de una solicitud</td><td>Escribir textos o responder preguntas</td></tr>
+                        </tbody>
+                </table>
+            </div>
+            <p class="mt-3 mb-0">El aprendizaje automático tiene dos momentos: el <strong>entrenamiento</strong> (se le muestran ejemplos etiquetados) y el <strong>uso</strong> (recibe un ejemplo nuevo y responde con el modelo que ya tiene).</p>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Ejemplo de algoritmo: ¿aprobó la materia?</h2>
+            <p>El computador no necesita saber qué significa aprobar: solo compara la nota con 3.</p>
+            <h3 class="mb-3 mt-4">Algoritmo en PSeInt:</h3>
+            <div class="bg-white rounded-3 p-3"><pre>
+Algoritmo Aprobado
+    Definir nota Como Real
+    Escribir &quot;Ingrese la nota:&quot;
+    Leer nota
+    Si nota &gt;= 3 Entonces
+        Escribir &quot;aprobado&quot;
+    SiNo
+        Escribir &quot;debe recuperar&quot;
+    FinSi
+FinAlgoritmo</pre></div>
+            <h3 class="mb-3 mt-4">Pruebas:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col">Nota</th><th scope="col">Salida</th></tr></thead>
+                    <tbody>
+                        <tr><td>4.5</td><td>aprobado</td></tr>
+                        <tr><td>3</td><td>aprobado (borde)</td></tr>
+                        <tr><td>2.9</td><td>debe recuperar</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Tabla comparativa.</h2>
+            <p>Diferencias entre un algoritmo con reglas escritas a mano y el aprendizaje automático.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light align-middle text-center">
+                    <thead><tr><th scope="col"></th><th scope="col">Algoritmo con reglas escritas a mano</th><th scope="col">Aprendizaje automático</th></tr></thead>
+                    <tbody>
+                        <tr><td>¿Quién define las instrucciones?</td><td>Una persona, de antemano</td><td>El sistema las ajusta a partir de ejemplos</td></tr>
+                        <tr><td>¿Qué necesita?</td><td>Conocer bien la situación</td><td>Muchos ejemplos</td></tr>
+                        <tr><td>Tipo de respuesta</td><td>Siempre la misma ante la misma entrada</td><td>Probable, puede equivocarse</td></tr>
+                        <tr><td>Ejemplo</td><td>Calculadora, puerta automática</td><td>Reconocer gatos, recomendar música</td></tr>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="p-4 my-4 rounded-4 text-black">
+            <h2 class="text-center mb-3">Preguntas para repasar.</h2>
+            <p></p>
+            <div class="bg-white rounded-3 p-3"><ol class="mb-0">
+                <li>¿Por qué una calculadora siempre responde igual y una app que recomienda música puede mostrar artistas nuevos?</li>
+                <li>¿Qué es una condición y qué es una acción en una regla?</li>
+                <li>¿Por qué es difícil escribir reglas a mano para reconocer gatos?</li>
+                <li>¿Qué significa que una máquina «aprende» en aprendizaje automático?</li>
+                <li>¿Qué diferencia hay entre entrenamiento y uso?</li>
+                <li>¿Por qué la respuesta de un modelo puede ser equivocada?</li>
+                <li>Ordena de más amplio a más específico: aprendizaje profundo, IA, aprendizaje automático.</li>
+            </ol></div>
+        </section>
+    </main>
+
+    <footer class="text-white text-center p-2">
+        <p class="mb-0">Algoritmia | Algoritmo o IA</p>
+    </footer>
+</body>
+</html>
